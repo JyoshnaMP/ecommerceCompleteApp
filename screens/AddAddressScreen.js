@@ -110,7 +110,7 @@ const AddAddressScreen = () => {
               {item?.houseNumber}, {item?.landmark}
             </Text>
             <Text style={{fontSize: 14, color: '#181818'}}>{item?.street}</Text>
-            <Text style={{fontSize: 14, color: '#181818'}}>PIN Code: {item?.pinCode}</Text>
+            <Text style={{fontSize: 14, color: '#181818'}}>PIN Code: {item?.postalCode}</Text>
             <Text style={{fontSize: 14, color: '#181818'}}>Phone: {item?.mobileNumber}</Text>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 10, marginTop: 7}}>
               <Pressable style={{

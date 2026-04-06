@@ -13,7 +13,7 @@ const address = () => {
   const [houseNumber, setHouseNumber] = useState("");
   const [street, setStreet] = useState("");
   const [landmark, setLandmark] = useState("");
-  const [pinCode, setPinCode] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const {userId, setUserId} = useContext(UserType);  // ✅ fixed: UserType not userType
 
   useEffect(()=>{
@@ -34,11 +34,11 @@ const address = () => {
   }, []);
   
   const handleAddresses = ()=>{
-    if (!name || !mobileNumber || !houseNumber || !street || !pinCode) {
+    if (!name || !mobileNumber || !houseNumber || !street || !postalCode) {
       Alert.alert("Error", "Please fill all fields");
       return;
     }
-    const address = {name, mobileNumber, houseNumber, street, landmark, pinCode}
+    const address = {name, mobileNumber, houseNumber, street, landmark, postalCode}
     axios.post("https://ecommerce-oa46.onrender.com/addresses", {userId, address})  // ✅ fixed: was "hhttps"
     .then((response)=>{
       Alert.alert("Success", "Address added successfully");
@@ -47,7 +47,7 @@ const address = () => {
       setHouseNumber("");
       setStreet("");
       setLandmark("");
-      setPinCode("");
+      setPostalCode("");
       setTimeout(()=>{navigation.goBack()}, 500);
     })
     .catch((error)=>{
@@ -135,8 +135,8 @@ const address = () => {
         <View style={{marginBottom: 15}}>
           <Text style={{fontSize: 15, fontWeight: "bold", marginBottom: 5}}>PIN Code</Text>
           <TextInput 
-            value={pinCode}  // ✅ fixed: was value='pinCode' hardcoded string
-            onChangeText={setPinCode}  // ✅ fixed: added onChangeText
+            value={postalCode}  // ✅ fixed: was value='pinCode' hardcoded string
+            onChangeText={setPostalCode}  // ✅ fixed: added onChangeText
             placeholder='Enter PIN Code' 
             placeholderTextColor={"gray"} 
             keyboardType="numeric"
