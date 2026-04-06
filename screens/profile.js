@@ -154,7 +154,7 @@ const profile = () => {
               <TouchableOpacity 
                 style={{marginTop: 20, padding: 15, borderRadius: 10, borderWidth: 1, borderColor: '#D0D0D0', marginHorizontal: 10, justifyContent: 'center', alignItems: 'center'}} 
                 key={order._id}>
-                {order.product.slice(0, 1)?.map((product) => (
+                {order.products.slice(0, 1)?.map((product) => (
                   <View style={{marginVertical: 10}} key={product._id}>
                     <Image 
                       source={{uri: product.image}} 
