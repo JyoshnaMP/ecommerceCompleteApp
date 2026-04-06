@@ -89,9 +89,14 @@ const productInfo = () => {
                 <Text>Add To Cart</Text>
             )}
         </TouchableOpacity>
-        <TouchableOpacity style={{backgroundColor: "#FFAC1C", padding: 10, borderRadius: 20, justifyContent: "center", alignItems: "center", marginHorizontal: 10, marginVertical: 10}}>
-            <Text>Buy Now</Text>
-        </TouchableOpacity>
+        <TouchableOpacity 
+    onPress={() => {
+        dispatch(addToCart(route?.params?.item)); // add to cart first
+        navigation.navigate("confirmation");       // then go to confirmation
+    }}
+    style={{backgroundColor: "#FFAC1C", padding: 10, borderRadius: 20, justifyContent: "center", alignItems: "center", marginHorizontal: 10, marginVertical: 10}}>
+    <Text>Buy Now</Text>
+</TouchableOpacity>
     </ScrollView>
   )
 }

@@ -74,34 +74,35 @@ console.log("total", total);  // ✅ add here
     };
 
     // Place order in backend
-    const placeOrderInBackend = async (paymentMethod) => {
-        try {
-            const orderData = {
-                userId: userId,
-                cartItems: cart,
-                totalPrice: total,
-                shippingAddress: {
-                    name: selectedAddress.name,
-                    mobileNumber: selectedAddress.mobileNumber,
-                    houseNo: selectedAddress.houseNumber,
-                    street: selectedAddress.street,
-                    landmark: selectedAddress.landmark,
-                    postalCode: selectedAddress.postalCode,
-                },
-                paymentMethod: paymentMethod,
-            };
-            const response = await axios.post(`${BASE_URL}/orders`, orderData);
-            if (response.status === 200) {
-                dispatch(cleanCart());
-                Alert.alert("Success", "Order placed successfully!", [
-                    { text: "OK", onPress: () => navigation.navigate("orderScreen") }
-                ]);
-            }
-        } catch (error) {
-            console.log("error placing order", error);
-            Alert.alert("Error", "Failed to place order. Please try again.");
+const placeOrderInBackend = async (paymentMethod) => {
+    try {
+        const orderData = {
+            userId: userId,
+            cartItems: cart,
+            totalPrice: total,
+            shippingAddress: {
+                name: selectedAddress.name,
+                mobileNumber: selectedAddress.mobileNumber,
+                houseNo: selectedAddress.houseNumber,
+                street: selectedAddress.street,
+                landmark: selectedAddress.landmark,
+                postalCode: selectedAddress.postalCode,
+            },
+            paymentMethod: paymentMethod,
+        };
+
+        const response = await axios.post(`${BASE_URL}/orders`, orderData);
+
+        if (response.status === 200) {
+            dispatch(cleanCart());        // ✅ clear cart
+            navigation.navigate("orderScreen"); // ✅ navigate directly, no Alert
         }
-    };
+    } catch (error) {
+        console.log("=== ERROR ===", error.response?.data);
+        // ✅ use console.log instead of Alert for web
+        console.log("Failed to place order");
+    }
+};
 
     // Cash on delivery
     const handlePlaceOrder = () => {
